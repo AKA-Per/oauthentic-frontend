@@ -13,9 +13,6 @@ import Profile from './pages/Profile';
 import Settings from './pages/Settings';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import OAuth from './components/auth/OAuth';
-import UserRegisterForm from './components/auth/UserRegisterForm';
-import ClientRegisterForm from './components/auth/ClientRegisterForm';
-import Error404 from './pages/Error404';
 import { LoaderProvider } from './context/LoaderContext';
 
 function App() {
@@ -23,36 +20,33 @@ function App() {
     <ThemeProvider>
       <Router>
         <LoaderProvider>
-          <AuthProvider>
-              <Routes>
-                <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} />
-                <Route path="/register/user" element={<UserRegisterForm />} />
-                <Route path="/register/client" element={<ClientRegisterForm />} />
-                <Route path='/oauth' element={<OAuth />} />
-                <Route path="*" element={<Error404 />} />
-                <Route
-                  path="/"
-                  element={
-                    <ProtectedRoute>
-                      <MainLayout>
-                        <Routes>
-                          <Route index element={<Navigate to="/dashboard" replace />} />
-                          <Route path="dashboard" element={<Dashboard />} />
-                          <Route path="users" element={<Users />} />
-                          <Route path="apps" element={<Apps />} />
-                          <Route path="apps/new" element={<AppForm />} />
-                          <Route path="apps/:id" element={<AppDetails />} />
-                          <Route path="apps/:id/edit" element={<AppForm />} />
-                          <Route path="profile" element={<Profile />} />
-                          <Route path="settings" element={<Settings />} />
-                        </Routes>
-                      </MainLayout>
-                    </ProtectedRoute>
-                  }
-                />
-              </Routes>
-          </AuthProvider>
+        <AuthProvider>
+            <Routes>
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              <Route path='/oauth' element={<OAuth />} />
+              <Route
+                path="/"
+                element={
+                  <ProtectedRoute>
+                    <MainLayout>
+                      <Routes>
+                        <Route index element={<Navigate to="/dashboard" replace />} />
+                        <Route path="dashboard" element={<Dashboard />} />
+                        <Route path="users" element={<Users />} />
+                        <Route path="apps" element={<Apps />} />
+                        <Route path="apps/new" element={<AppForm />} />
+                        <Route path="apps/:id" element={<AppDetails />} />
+                        <Route path="apps/:id/edit" element={<AppForm />} />
+                        <Route path="profile" element={<Profile />} />
+                        <Route path="settings" element={<Settings />} />
+                      </Routes>
+                    </MainLayout>
+                  </ProtectedRoute>
+                }
+              />
+            </Routes>
+        </AuthProvider>
         </LoaderProvider>
       </Router>
     </ThemeProvider>
